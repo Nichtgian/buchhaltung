@@ -20,6 +20,13 @@ erfasst und je nach verlangen als 1-, 2- oder 3-Stufige ER darstellen.
 
 ![Erfolgsrechnung](src/Erfolgsrechnung.png)
 
+## Mockups
+Die Mockupw wurden mit Ninjamock erstellt.
+
+![Mockup Bilanz](src/Mockup-Bilanz.png)
+![Mockup Journal](src/Mockup-Journal.png)
+![Mockup Adding](src/Mockup-Adding.png)
+
 ## Gruppenmitglieder
 * [Gian](https://github.com/Nichtgian)
 * [Manuel](https://github.com/ManuelTroxler)
