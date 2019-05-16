@@ -9,16 +9,16 @@ und diese berechneten Saldos in die Bilanz übertragen, damit die Schlussbilanz 
 
 Logik nachder Berechnung durch Zunahmen und Abnahmen bei den (aktiv) Konten erfolgt.
 
-![Aktivkonto Kasse](src/Kasse.jpg)
+![Aktivkonto Kasse](src/Kasse.png)
  
 Die konkrete Logik nachder die Berechnung der Bilanz mit den erfassten Geschäftsfällen erfolgt.
  
-![Bilanz](src/Bilanz.jpg)
+![Bilanz](src/Bilanz.png)
 
 Bei vorhanderner Zeit möchten wir auch das Erstellen der Erfolgsrechnung ermöglichen. Dazu können die die einzelnen Aufwände oder Erträge
 erfasst und je nach verlangen als 1-, 2- oder 3-Stufige ER darstellen. 
 
-![Erfolgsrechnung](src/Erfolgsrechnung.jpg)
+![Erfolgsrechnung](src/Erfolgsrechnung.png)
 
 ## Gruppenmitglieder
 * [Gian](https://github.com/Nichtgian)
