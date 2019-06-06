@@ -1,4 +1,4 @@
-# buchhaltungs programm
+﻿# buchhaltungs programm
 Dieses Repository enthält die Dokumentation sowie das Programm zum Berechnen diverser Buchhaltungen.
 Umgesetzt wird es in ASP.Net MVC.
 
@@ -7,6 +7,17 @@ Auf unserer Seite können die Benutzer Bilanzen und die Erfolgsrechnung erstelle
 Danach werden für die einzelnen aktiv und passiv Konten (wie Kasse, VLL oder Eigenkapital) mit den Buchunssätze erfasst (Zunahmen & Abnahmen) 
 und diese berechneten Saldos in die Bilanz übertragen, damit die Schlussbilanz mit berechnetem Gewinn oder Verlust ausgegeben wird.
 
+## Mockups
+Die Mockupw wurden mit Ninjamock erstellt.
+
+![Mockup Bilanz](src/Mockup-Bilanz.png)
+![Mockup Journal](src/Mockup-Journal.png)
+![Mockup Adding](src/Mockup-Adding.png)
+
+## Schema
+![DB Schema](src/db.jpg)
+
+## Berechnung
 Logik nachder Berechnung durch Zunahmen und Abnahmen bei den (aktiv) Konten erfolgt.
 
 ![Aktivkonto Kasse](src/Kasse.png)
@@ -19,13 +30,6 @@ Bei vorhanderner Zeit möchten wir auch das Erstellen der Erfolgsrechnung ermög
 erfasst und je nach verlangen als 1-, 2- oder 3-Stufige ER darstellen. 
 
 ![Erfolgsrechnung](src/Erfolgsrechnung.png)
-
-## Mockups
-Die Mockupw wurden mit Ninjamock erstellt.
-
-![Mockup Bilanz](src/Mockup-Bilanz.png)
-![Mockup Journal](src/Mockup-Journal.png)
-![Mockup Adding](src/Mockup-Adding.png)
 
 ## Gruppenmitglieder
 * [Gian](https://github.com/Nichtgian)
