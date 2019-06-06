@@ -56,14 +56,14 @@ INSERT INTO Konto ('Bank', 'BA', 2, 1);
 INSERT INTO Konto ('Post', 'PO', 3, 1);
 INSERT INTO Konto ('Forderungen LL', 'FLL', 4, 1);
 
-INSERT INTO Konto ('Mobilien', 'MO', 1, 2);
-INSERT INTO Konto ('Warenbestand', 'WaB', 2, 2);
+INSERT INTO Konto ('Warenbestand', 'WaB', 1, 2);
+INSERT INTO Konto ('Mobilien', 'MO', 2, 2);
 INSERT INTO Konto ('Immobilien', 'IM', 3, 2);
 
 INSERT INTO Konto ('Verbindlichkeiten LL', 'VLL', 1, 3);
 INSERT INTO Konto ('Darlehensschuld', 'DS', 2, 3);
 INSERT INTO Konto ('Hypothek', 'HY', 3, 3);
 
-INSERT INTO Konto ('Eigenkapital', 'EIK', 1, 3);
+INSERT INTO Konto ('Eigenkapital', 'EIK', 1, 4);
 
 INSERT INTO Bilanz ('Bilanz BBZW Sursee', 'BBZW2019', GETDATE());
