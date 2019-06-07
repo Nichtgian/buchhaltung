@@ -1,5 +1,8 @@
 CREATE DATABASE Buchhaltung;
-GO;
+GO
+
+USE Buchhaltung;
+GO
 
 CREATE TABLE Bilanz (
   Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
@@ -44,26 +47,26 @@ CREATE TABLE Anfangsbetrag (
   FOREIGN KEY (Bilanz) REFERENCES Bilanz(Id),
 );
 
-GO;
+GO
 
-INSERT INTO KontoArt ('Umlauf Vermögen', 'UL');
-INSERT INTO KontoArt ('Anlage Vermögen', 'AL');
-INSERT INTO KontoArt ('Fremdkapital', 'FK');
-INSERT INTO KontoArt ('Eigenkapital', 'EK');
+INSERT INTO KontoArt VALUES ('Umlauf Vermögen', 'UL');
+INSERT INTO KontoArt VALUES ('Anlage Vermögen', 'AL');
+INSERT INTO KontoArt VALUES ('Fremdkapital', 'FK');
+INSERT INTO KontoArt VALUES ('Eigenkapital', 'EK');
 
-INSERT INTO Konto ('Kasse', 'KA', 1, 1);
-INSERT INTO Konto ('Bank', 'BA', 2, 1);
-INSERT INTO Konto ('Post', 'PO', 3, 1);
-INSERT INTO Konto ('Forderungen LL', 'FLL', 4, 1);
+INSERT INTO Konto VALUES ('Kasse', 'KA', 1, 1);
+INSERT INTO Konto VALUES ('Bank', 'BA', 2, 1);
+INSERT INTO Konto VALUES ('Post', 'PO', 3, 1);
+INSERT INTO Konto VALUES ('Forderungen LL', 'FLL', 4, 1);
 
-INSERT INTO Konto ('Warenbestand', 'WaB', 1, 2);
-INSERT INTO Konto ('Mobilien', 'MO', 2, 2);
-INSERT INTO Konto ('Immobilien', 'IM', 3, 2);
+INSERT INTO Konto VALUES ('Warenbestand', 'WaB', 1, 2);
+INSERT INTO Konto VALUES ('Mobilien', 'MO', 2, 2);
+INSERT INTO Konto VALUES ('Immobilien', 'IM', 3, 2);
 
-INSERT INTO Konto ('Verbindlichkeiten LL', 'VLL', 1, 3);
-INSERT INTO Konto ('Darlehensschuld', 'DS', 2, 3);
-INSERT INTO Konto ('Hypothek', 'HY', 3, 3);
+INSERT INTO Konto VALUES ('Verbindlichkeiten LL', 'VLL', 1, 3);
+INSERT INTO Konto VALUES ('Darlehensschuld', 'DS', 2, 3);
+INSERT INTO Konto VALUES ('Hypothek', 'HY', 3, 3);
 
-INSERT INTO Konto ('Eigenkapital', 'EIK', 1, 4);
+INSERT INTO Konto VALUES ('Eigenkapital', 'EIK', 1, 4);
 
-INSERT INTO Bilanz ('Bilanz BBZW Sursee', 'BBZW2019', GETDATE());
+INSERT INTO Bilanz VALUES ('Bilanz BBZW Sursee', 'BBZW2019', GETDATE());
