@@ -14,7 +14,7 @@ namespace Buchhaltung
                 url: "{controller}/{action}/{id}",
                 defaults: new
                 {
-                    controller = "Home",
+                    controller = "Bilanz",
                     action = "Index",
                     id = UrlParameter.Optional
                 }

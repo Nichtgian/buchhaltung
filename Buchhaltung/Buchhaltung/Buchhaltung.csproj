@@ -158,7 +158,8 @@
     <Compile Include="Buchungssatz.cs">
       <DependentUpon>BuchhaltungModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\BilanzController.cs" />
+    <Compile Include="Controllers\BuchungssatzController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -168,6 +169,9 @@
     <Compile Include="KontoArt.cs">
       <DependentUpon>BuchhaltungModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AnfangsbetragRepository.cs" />
+    <Compile Include="Models\BilanzRepository.cs" />
+    <Compile Include="Models\BuchungssatzRepository.cs" />
     <Compile Include="Models\KontoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -221,9 +225,16 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Journal.cshtml" />
-    <Content Include="Views\Home\Start.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Buchungssatz\Create.cshtml" />
+    <Content Include="Views\Buchungssatz\Delete.cshtml" />
+    <Content Include="Views\Buchungssatz\Details.cshtml" />
+    <Content Include="Views\Buchungssatz\Edit.cshtml" />
+    <Content Include="Views\Buchungssatz\Index.cshtml" />
+    <Content Include="Views\Bilanz\Create.cshtml" />
+    <Content Include="Views\Bilanz\Delete.cshtml" />
+    <Content Include="Views\Bilanz\Details.cshtml" />
+    <Content Include="Views\Bilanz\Edit.cshtml" />
+    <Content Include="Views\Bilanz\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

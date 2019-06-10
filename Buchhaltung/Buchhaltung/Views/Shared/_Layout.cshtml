@@ -19,13 +19,12 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                @Html.ActionLink("Bilanz", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+                @Html.ActionLink("Bilanz", "Index", "Bilanz", new {area = ""}, new {@class = "navbar-brand"})
             </div>
 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Journal", "Journal", "Home")</li>
-                    <li>@Html.ActionLink("Anfangsbeträge", "Start", "Home")</li>
+                    <li>@Html.ActionLink("Journal", "Index", "Buchungssatz")</li>
                 </ul>
             </div>
 

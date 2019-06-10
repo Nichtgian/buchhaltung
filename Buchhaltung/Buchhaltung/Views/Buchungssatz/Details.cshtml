@@ -1,0 +1,58 @@
+﻿@model Buchhaltung.Buchungssatz
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Buchungssatz</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Betrag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Betrag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Beschreibung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Beschreibung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bilanz1.Bezeichnung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bilanz1.Bezeichnung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Konto.Bezeichnung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Konto.Bezeichnung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Konto1.Bezeichnung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Konto1.Bezeichnung)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
