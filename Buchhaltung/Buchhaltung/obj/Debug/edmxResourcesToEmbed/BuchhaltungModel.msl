@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BuchhaltungDbModelStoreContainer" CdmEntityContainer="BuchhaltungDbContext">
+    <EntitySetMapping Name="Anfangsbetrag">
+      <EntityTypeMapping TypeName="BuchhaltungDbModel.Anfangsbetrag">
+        <MappingFragment StoreEntitySet="Anfangsbetrag">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Konto" ColumnName="Konto" />
+          <ScalarProperty Name="Betrag" ColumnName="Betrag" />
+          <ScalarProperty Name="Bilanz" ColumnName="Bilanz" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bilanz">
+      <EntityTypeMapping TypeName="BuchhaltungDbModel.Bilanz">
+        <MappingFragment StoreEntitySet="Bilanz">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Bezeichnung" ColumnName="Bezeichnung" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Buchungssatz">
+      <EntityTypeMapping TypeName="BuchhaltungDbModel.Buchungssatz">
+        <MappingFragment StoreEntitySet="Buchungssatz">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Soll" ColumnName="Soll" />
+          <ScalarProperty Name="Haben" ColumnName="Haben" />
+          <ScalarProperty Name="Betrag" ColumnName="Betrag" />
+          <ScalarProperty Name="Beschreibung" ColumnName="Beschreibung" />
+          <ScalarProperty Name="Bilanz" ColumnName="Bilanz" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Konto">
+      <EntityTypeMapping TypeName="BuchhaltungDbModel.Konto">
+        <MappingFragment StoreEntitySet="Konto">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Bezeichnung" ColumnName="Bezeichnung" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Reihenfolge" ColumnName="Reihenfolge" />
+          <ScalarProperty Name="KontoArt" ColumnName="KontoArt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KontoArt">
+      <EntityTypeMapping TypeName="BuchhaltungDbModel.KontoArt">
+        <MappingFragment StoreEntitySet="KontoArt">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Bezeichnung" ColumnName="Bezeichnung" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
