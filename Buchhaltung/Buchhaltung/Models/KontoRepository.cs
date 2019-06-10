@@ -12,5 +12,13 @@ namespace Buchhaltung.Models
                 return ctx.Konto.ToList();
             }
         }
+
+        public IEnumerable<Konto> GetAllKontosOfKontoArt(KontoArt kontoArt)
+        {
+            using (var ctx = new BuchhaltungDbContext())
+            {
+                return ctx.Konto.Where(k => k.KontoArt == kontoArt.Id).OrderBy(k => k.Reihenfolge);
+            }
+        }
     }
 }
