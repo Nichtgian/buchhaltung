@@ -1,130 +1,141 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
-using Buchhaltung;
+using Buchhaltung.Models;
+using Buchhaltung.Models.Repository;
 
 namespace Buchhaltung.Controllers
 {
     public class BuchungssatzController : Controller
     {
-        private BuchhaltungDbContext db = new BuchhaltungDbContext();
+        private BuchungssatzRepository repository = new BuchungssatzRepository();
+        private BuchhaltungDbContext ctx = new BuchhaltungDbContext();
 
-        // GET: Buchungssatz
-        public ActionResult Index()
+        public ActionResult Index(int? bilanz)
         {
-            var buchungssatz = db.Buchungssatz.Include(b => b.Bilanz1).Include(b => b.Konto).Include(b => b.Konto1);
-            return View(buchungssatz.ToList());
+            ViewBag.Bilanz = null;
+
+            if (bilanz != null)
+            {
+                ViewBag.Bilanz = bilanz;
+                return View(repository.GetAllBuchungssatzOfBilanz((int)bilanz));
+            }
+
+            return View(repository.GetAllBuchungssatz());
         }
 
-        // GET: Buchungssatz/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Create(int? bilanz)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Buchungssatz buchungssatz = db.Buchungssatz.Find(id);
-            if (buchungssatz == null)
-            {
-                return HttpNotFound();
-            }
-            return View(buchungssatz);
-        }
+            ViewBag.BilanzId = new SelectList(ctx.Bilanz, "Id", "Bezeichnung", bilanz);
+            ViewBag.HabenId = new SelectList(ctx.Konto, "Id", "Bezeichnung");
+            ViewBag.SollId = new SelectList(ctx.Konto, "Id", "Bezeichnung");
 
-        // GET: Buchungssatz/Create
-        public ActionResult Create()
-        {
-            ViewBag.Bilanz = new SelectList(db.Bilanz, "Id", "Bezeichnung");
-            ViewBag.Haben = new SelectList(db.Konto, "Id", "Bezeichnung");
-            ViewBag.Soll = new SelectList(db.Konto, "Id", "Bezeichnung");
             return View();
         }
 
-        // POST: Buchungssatz/Create
-        // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
-        // finden Sie unter https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Soll,Haben,Betrag,Beschreibung,Bilanz")] Buchungssatz buchungssatz)
+        public ActionResult Create([Bind(Include = "Id,SollId,HabenId,Betrag,Beschreibung,BilanzId")] Buchungssatz buchungssatz, int? bilanz)
         {
             if (ModelState.IsValid)
             {
-                db.Buchungssatz.Add(buchungssatz);
-                db.SaveChanges();
+                repository.Create(buchungssatz);
+
+                if (bilanz != null)
+                {
+                    return RedirectToAction("Index", new { bilanz });
+                }
+
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Bilanz = new SelectList(db.Bilanz, "Id", "Bezeichnung", buchungssatz.Bilanz);
-            ViewBag.Haben = new SelectList(db.Konto, "Id", "Bezeichnung", buchungssatz.Haben);
-            ViewBag.Soll = new SelectList(db.Konto, "Id", "Bezeichnung", buchungssatz.Soll);
+            ViewBag.BilanzId = new SelectList(ctx.Bilanz, "Id", "Bezeichnung");
+            ViewBag.HabenId = new SelectList(ctx.Konto, "Id", "Bezeichnung");
+            ViewBag.SollId = new SelectList(ctx.Konto, "Id", "Bezeichnung");
+
             return View(buchungssatz);
         }
 
-        // GET: Buchungssatz/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, int? bilanz)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Buchungssatz buchungssatz = db.Buchungssatz.Find(id);
+
+            Buchungssatz buchungssatz = repository.GetBuchungssatzById(id);
+
             if (buchungssatz == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Bilanz = new SelectList(db.Bilanz, "Id", "Bezeichnung", buchungssatz.Bilanz);
-            ViewBag.Haben = new SelectList(db.Konto, "Id", "Bezeichnung", buchungssatz.Haben);
-            ViewBag.Soll = new SelectList(db.Konto, "Id", "Bezeichnung", buchungssatz.Soll);
+
+            if (bilanz != null)
+            {
+                ViewBag.Bilanz = bilanz;
+            }
+
+            ViewBag.BilanzId = new SelectList(ctx.Bilanz, "Id", "Bezeichnung", bilanz);
+            ViewBag.HabenId = new SelectList(ctx.Konto, "Id", "Bezeichnung");
+            ViewBag.SollId = new SelectList(ctx.Konto, "Id", "Bezeichnung");
+
             return View(buchungssatz);
         }
 
-        // POST: Buchungssatz/Edit/5
-        // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
-        // finden Sie unter https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Soll,Haben,Betrag,Beschreibung,Bilanz")] Buchungssatz buchungssatz)
+        public ActionResult Edit([Bind(Include = "Id,SollId,HabenId,Betrag,Beschreibung,BilanzId")] Buchungssatz buchungssatz, int? bilanz)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(buchungssatz).State = EntityState.Modified;
-                db.SaveChanges();
+                repository.Edit(buchungssatz);
+
+                if (bilanz != null)
+                {
+                    return RedirectToAction("Index", new { bilanz });
+                }
+
                 return RedirectToAction("Index");
             }
-            ViewBag.Bilanz = new SelectList(db.Bilanz, "Id", "Bezeichnung", buchungssatz.Bilanz);
-            ViewBag.Haben = new SelectList(db.Konto, "Id", "Bezeichnung", buchungssatz.Haben);
-            ViewBag.Soll = new SelectList(db.Konto, "Id", "Bezeichnung", buchungssatz.Soll);
+
+            ViewBag.BilanzId = new SelectList(ctx.Bilanz, "Id", "Bezeichnung");
+            ViewBag.HabenId = new SelectList(ctx.Konto, "Id", "Bezeichnung");
+            ViewBag.SollId = new SelectList(ctx.Konto, "Id", "Bezeichnung");
+
             return View(buchungssatz);
         }
 
-        // GET: Buchungssatz/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id, int? bilanz)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Buchungssatz buchungssatz = db.Buchungssatz.Find(id);
+
+            Buchungssatz buchungssatz = repository.GetBuchungssatzById(id);
+
             if (buchungssatz == null)
             {
                 return HttpNotFound();
             }
+
+            if (bilanz != null)
+            {
+                ViewBag.Bilanz = bilanz;
+            }
+
             return View(buchungssatz);
         }
 
-        // POST: Buchungssatz/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, int? bilanz)
         {
-            Buchungssatz buchungssatz = db.Buchungssatz.Find(id);
-            db.Buchungssatz.Remove(buchungssatz);
-            db.SaveChanges();
+            repository.Delete(id);
+            if (bilanz != null)
+            {
+                return RedirectToAction("Index", new { bilanz });
+            }
+
             return RedirectToAction("Index");
         }
 
@@ -132,8 +143,9 @@ namespace Buchhaltung.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                repository.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }

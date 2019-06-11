@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Buchhaltung
+namespace Buchhaltung.Models
 {
     using System;
     using System.Collections.Generic;
@@ -15,14 +15,14 @@ namespace Buchhaltung
     public partial class Buchungssatz
     {
         public int Id { get; set; }
-        public int Soll { get; set; }
-        public int Haben { get; set; }
+        public int SollId { get; set; }
+        public int HabenId { get; set; }
         public double Betrag { get; set; }
         public string Beschreibung { get; set; }
-        public Nullable<int> Bilanz { get; set; }
+        public int BilanzId { get; set; }
     
-        public virtual Bilanz Bilanz1 { get; set; }
-        public virtual Konto Konto { get; set; }
-        public virtual Konto Konto1 { get; set; }
+        public virtual Bilanz Bilanz { get; set; }
+        public virtual Konto Haben { get; set; }
+        public virtual Konto Soll { get; set; }
     }
 }

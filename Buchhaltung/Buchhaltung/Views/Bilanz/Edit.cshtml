@@ -1,10 +1,10 @@
-﻿@model Buchhaltung.Bilanz
+﻿@model Buchhaltung.Models.Bilanz
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Bilanz Edit";
 }
 
-<h2>Edit</h2>
+<h2>Edit Bilanz</h2>
 
 
 @using (Html.BeginForm())
@@ -12,8 +12,6 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Bilanz</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
@@ -43,14 +41,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Speichern" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Zurück", "Index")
 </div>
 
 @section Scripts {

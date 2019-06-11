@@ -32,7 +32,7 @@ CREATE TABLE Buchungssatz (
   Haben INT NOT NULL,
   Betrag FLOAT NOT NULL,
   Beschreibung VARCHAR(250),
-  Bilanz INT,
+  Bilanz INT NOT NULL,
   FOREIGN KEY (Soll) REFERENCES Konto(Id),
   FOREIGN KEY (Haben) REFERENCES Konto(Id),
   FOREIGN KEY (Bilanz) REFERENCES Bilanz(Id)

@@ -1,35 +1,32 @@
-﻿@model Buchhaltung.Buchungssatz
+﻿@model Buchhaltung.Models.Buchungssatz
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Buchungssatz Edit";
 }
 
-<h2>Edit</h2>
-
+<h2>Edit Buchungssatz</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Buchungssatz</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Soll, "Soll", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SollId, "Soll", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Soll", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Soll, "", new { @class = "text-danger" })
+                @Html.DropDownList("SollId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SollId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Haben, "Haben", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.HabenId, "Haben", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Haben", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Haben, "", new { @class = "text-danger" })
+                @Html.DropDownList("HabenId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.HabenId, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -50,25 +47,28 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Bilanz, "Bilanz", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.BilanzId, "Bilanz", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Bilanz", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Bilanz, "", new { @class = "text-danger" })
+                @Html.DropDownList("BilanzId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BilanzId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Speichern" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @if (ViewBag.Bilanz != null)
+    {
+        @Html.ActionLink("Zurück", "Index", "Buchungssatz", new { bilanz = ViewBag.Bilanz }, null)
+    }
+    else
+    {
+        @Html.ActionLink("Zurück", "Index")
+    }
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

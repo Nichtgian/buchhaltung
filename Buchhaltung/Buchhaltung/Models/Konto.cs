@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Buchhaltung
+namespace Buchhaltung.Models
 {
     using System;
     using System.Collections.Generic;
@@ -18,22 +18,22 @@ namespace Buchhaltung
         public Konto()
         {
             this.Anfangsbetrag = new HashSet<Anfangsbetrag>();
-            this.Buchungssatz = new HashSet<Buchungssatz>();
-            this.Buchungssatz1 = new HashSet<Buchungssatz>();
+            this.Haben = new HashSet<Buchungssatz>();
+            this.Soll = new HashSet<Buchungssatz>();
         }
     
         public int Id { get; set; }
         public string Bezeichnung { get; set; }
         public string Code { get; set; }
         public int Reihenfolge { get; set; }
-        public int KontoArt { get; set; }
+        public int KontoArtId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Anfangsbetrag> Anfangsbetrag { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Buchungssatz> Buchungssatz { get; set; }
+        public virtual ICollection<Buchungssatz> Haben { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Buchungssatz> Buchungssatz1 { get; set; }
-        public virtual KontoArt KontoArt1 { get; set; }
+        public virtual ICollection<Buchungssatz> Soll { get; set; }
+        public virtual KontoArt KontoArt { get; set; }
     }
 }

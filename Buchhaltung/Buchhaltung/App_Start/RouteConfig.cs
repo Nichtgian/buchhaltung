@@ -19,6 +19,12 @@ namespace Buchhaltung
                     id = UrlParameter.Optional
                 }
             );
+
+            //routes.MapRoute(
+            //    name: "BilanzDetails",
+            //    url: "Bilanz/{action}/{id}",
+            //    defaults: new { controller = "Bilanz", action = "Details" }
+            //);
         }
     }
 }

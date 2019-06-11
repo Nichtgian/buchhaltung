@@ -1,42 +1,89 @@
-﻿@model Buchhaltung.Bilanz
+﻿@model Buchhaltung.Models.Bilanz
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Bilanz Details";
 }
 
-<h2>Details</h2>
+<h2>@Html.DisplayFor(model => model.Bezeichnung) Details</h2>
+
+<p>
+    @Html.ActionLink("Zurück", "Index") |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Anfangsbeträge", "Index", "Buchungssatz", new { bilanz = Model.Id }, null) |
+    @Html.ActionLink("Geschäftsfälle", "Index", "Buchungssatz", new { bilanz = Model.Id }, null)
+</p>
 
 <div>
-    <h4>Bilanz</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Bezeichnung)
-        </dt>
+    <div class="row" style="text-align: center; border-bottom: solid black 1px">
+        <div class="col-md-4">
+            <p>Aktiven</p>
+        </div>
+        <div class="col-md-4">
+            <p><b>Bilanz</b> vom (@Html.DisplayFor(model => model.Datum))</p>
+        </div>
+        <div class="col-md-4">
+            <p>Passiven</p>
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Bezeichnung)
-        </dd>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <p><b>UL</b></p>
+                </div>
+                <div class="col-md-12" style="margin-left: 3em">
+                    <p>K1</p>
+                </div>
+                <div class="col-md-12" style="margin-left: 3em">
+                    <p>K2</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" style="border-left: solid black 1px">
+            <div class="row">
+                <div class="col-md-12">
+                    <p><b>UL</b></p>
+                </div>
+                <div class="col-md-12" style="margin-left: 3em">
+                    <p>K1</p>
+                </div>
+                <div class="col-md-12" style="margin-left: 3em">
+                    <p>K2</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Code)
-        </dt>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <p><b>UL</b></p>
+                </div>
+                <div class="col-md-12" style="margin-left: 3em">
+                    <p>K1</p>
+                </div>
+                <div class="col-md-12" style="margin-left: 3em">
+                    <p>K2</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" style="border-left: solid black 1px">
+            <div class="row">
+                <div class="col-md-12">
+                    <p><b>UL</b></p>
+                </div>
+                <div class="col-md-12" style="margin-left: 3em">
+                    <p>K1</p>
+                </div>
+                <div class="col-md-12" style="margin-left: 3em">
+                    <p>K2</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Code)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Datum)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Datum)
-        </dd>
-
-    </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

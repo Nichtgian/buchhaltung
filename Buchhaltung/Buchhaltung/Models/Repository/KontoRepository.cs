@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Buchhaltung.Models
+namespace Buchhaltung.Models.Repository
 {
     public class KontoRepository
     {
@@ -17,7 +17,7 @@ namespace Buchhaltung.Models
         {
             using (var ctx = new BuchhaltungDbContext())
             {
-                return ctx.Konto.Where(k => k.KontoArt == kontoArt.Id).OrderBy(k => k.Reihenfolge);
+                return ctx.Konto.Where(k => k.KontoArtId == kontoArt.Id).OrderBy(k => k.Reihenfolge);
             }
         }
     }

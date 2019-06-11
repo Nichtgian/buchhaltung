@@ -131,61 +131,52 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Anfangsbetrag.cs">
-      <DependentUpon>BuchhaltungModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Bilanz.cs">
-      <DependentUpon>BuchhaltungModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BuchhaltungModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BuchhaltungModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BuchhaltungModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BuchhaltungModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BuchhaltungModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BuchhaltungModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Buchungssatz.cs">
-      <DependentUpon>BuchhaltungModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Controllers\AnfangsbetragController.cs" />
     <Compile Include="Controllers\BilanzController.cs" />
     <Compile Include="Controllers\BuchungssatzController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Konto.cs">
+    <Compile Include="Models\Anfangsbetrag.cs">
       <DependentUpon>BuchhaltungModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="KontoArt.cs">
+    <Compile Include="Models\Bilanz.cs">
       <DependentUpon>BuchhaltungModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AnfangsbetragRepository.cs" />
-    <Compile Include="Models\BilanzRepository.cs" />
-    <Compile Include="Models\BuchungssatzRepository.cs" />
-    <Compile Include="Models\KontoRepository.cs" />
+    <Compile Include="Models\BuchhaltungModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BuchhaltungModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BuchhaltungModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BuchhaltungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BuchhaltungModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BuchhaltungModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Buchungssatz.cs">
+      <DependentUpon>BuchhaltungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Konto.cs">
+      <DependentUpon>BuchhaltungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KontoArt.cs">
+      <DependentUpon>BuchhaltungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Repository\AnfangsbetragRepository.cs" />
+    <Compile Include="Models\Repository\BilanzRepository.cs" />
+    <Compile Include="Models\Repository\BuchungssatzRepository.cs" />
+    <Compile Include="Models\Repository\KontoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BuchhaltungModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BuchhaltungModel.Context.cs</LastGenOutput>
-      <DependentUpon>BuchhaltungModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="BuchhaltungModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BuchhaltungModel.edmx</DependentUpon>
-      <LastGenOutput>BuchhaltungModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -194,13 +185,23 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\BuchhaltungModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BuchhaltungModel.edmx</DependentUpon>
+      <LastGenOutput>BuchhaltungModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\BuchhaltungModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BuchhaltungModel.edmx</DependentUpon>
+      <LastGenOutput>BuchhaltungModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="BuchhaltungModel.edmx">
+    <EntityDeploy Include="Models\BuchhaltungModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BuchhaltungModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="BuchhaltungModel.edmx.diagram">
+    <Content Include="Models\BuchhaltungModel.edmx.diagram">
       <DependentUpon>BuchhaltungModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -225,16 +226,20 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Buchungssatz\Create.cshtml" />
-    <Content Include="Views\Buchungssatz\Delete.cshtml" />
-    <Content Include="Views\Buchungssatz\Details.cshtml" />
-    <Content Include="Views\Buchungssatz\Edit.cshtml" />
-    <Content Include="Views\Buchungssatz\Index.cshtml" />
     <Content Include="Views\Bilanz\Create.cshtml" />
     <Content Include="Views\Bilanz\Delete.cshtml" />
     <Content Include="Views\Bilanz\Details.cshtml" />
     <Content Include="Views\Bilanz\Edit.cshtml" />
     <Content Include="Views\Bilanz\Index.cshtml" />
+    <Content Include="Views\Buchungssatz\Create.cshtml" />
+    <Content Include="Views\Buchungssatz\Delete.cshtml" />
+    <Content Include="Views\Buchungssatz\Edit.cshtml" />
+    <Content Include="Views\Buchungssatz\Index.cshtml" />
+    <Content Include="Views\Anfangsbetrag\Create.cshtml" />
+    <Content Include="Views\Anfangsbetrag\Delete.cshtml" />
+    <Content Include="Views\Anfangsbetrag\Details.cshtml" />
+    <Content Include="Views\Anfangsbetrag\Edit.cshtml" />
+    <Content Include="Views\Anfangsbetrag\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

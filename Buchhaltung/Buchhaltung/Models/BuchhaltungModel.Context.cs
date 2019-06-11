@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Buchhaltung
+namespace Buchhaltung.Models
 {
     using System;
     using System.Data.Entity;

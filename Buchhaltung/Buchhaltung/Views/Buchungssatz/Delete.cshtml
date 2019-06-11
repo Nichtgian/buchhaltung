@@ -1,15 +1,12 @@
-﻿@model Buchhaltung.Buchungssatz
+﻿@model Buchhaltung.Models.Buchungssatz
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Buchungssatz Löschen";
 }
 
-<h2>Delete</h2>
+<h2>Lösche Buchungssatz</h2>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Buchungssatz</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Betrag)
@@ -28,27 +25,27 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Bilanz1.Bezeichnung)
+            @Html.DisplayNameFor(model => model.Bilanz.Bezeichnung)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Bilanz1.Bezeichnung)
+            @Html.DisplayFor(model => model.Bilanz.Bezeichnung)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Konto.Bezeichnung)
+            @Html.DisplayNameFor(model => model.Haben.Bezeichnung)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Konto.Bezeichnung)
+            @Html.DisplayFor(model => model.Haben.Bezeichnung)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Konto1.Bezeichnung)
+            @Html.DisplayNameFor(model => model.Soll.Bezeichnung)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Konto1.Bezeichnung)
+            @Html.DisplayFor(model => model.Soll.Bezeichnung)
         </dd>
 
     </dl>
@@ -57,8 +54,16 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @if (ViewBag.Bilanz != null)
+            {
+                @Html.ActionLink("Zurück", "Index", "Buchungssatz", new { bilanz = ViewBag.Bilanz }, null)
+            }
+            else
+            {
+                @Html.ActionLink("Zurück", "Index")
+            }
+            |
+            <input type="submit" value="Löschen" class="btn btn-default"/>
         </div>
     }
 </div>

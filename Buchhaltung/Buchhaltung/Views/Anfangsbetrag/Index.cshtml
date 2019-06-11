@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Buchhaltung.Models.Anfangsbetrag>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Betrag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bilanz.Bezeichnung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Konto.Bezeichnung)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Betrag)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bilanz.Bezeichnung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Konto.Bezeichnung)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

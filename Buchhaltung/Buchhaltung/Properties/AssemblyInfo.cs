@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Buchhaltung")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Komax AG")]
+[assembly: AssemblyCompany("Buchhaltung")]
 [assembly: AssemblyProduct("Buchhaltung")]
-[assembly: AssemblyCopyright("Copyright © Komax AG 2019")]
+[assembly: AssemblyCopyright("Copyright © Buchhaltung 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

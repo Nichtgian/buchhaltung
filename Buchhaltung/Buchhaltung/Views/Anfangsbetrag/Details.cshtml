@@ -1,4 +1,4 @@
-﻿@model Buchhaltung.Buchungssatz
+﻿@model Buchhaltung.Models.Anfangsbetrag
 
 @{
     ViewBag.Title = "Details";
@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Buchungssatz</h4>
+    <h4>Anfangsbetrag</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,19 +19,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Beschreibung)
+            @Html.DisplayNameFor(model => model.Bilanz.Bezeichnung)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Beschreibung)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Bilanz1.Bezeichnung)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Bilanz1.Bezeichnung)
+            @Html.DisplayFor(model => model.Bilanz.Bezeichnung)
         </dd>
 
         <dt>
@@ -40,14 +32,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Konto.Bezeichnung)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Konto1.Bezeichnung)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Konto1.Bezeichnung)
         </dd>
 
     </dl>

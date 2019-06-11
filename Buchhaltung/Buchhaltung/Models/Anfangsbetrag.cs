@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Buchhaltung
+namespace Buchhaltung.Models
 {
     using System;
     using System.Collections.Generic;
@@ -15,11 +15,11 @@ namespace Buchhaltung
     public partial class Anfangsbetrag
     {
         public int Id { get; set; }
-        public int Konto { get; set; }
+        public int KontoId { get; set; }
         public double Betrag { get; set; }
-        public int Bilanz { get; set; }
+        public int BilanzId { get; set; }
     
-        public virtual Bilanz Bilanz1 { get; set; }
-        public virtual Konto Konto1 { get; set; }
+        public virtual Bilanz Bilanz { get; set; }
+        public virtual Konto Konto { get; set; }
     }
 }

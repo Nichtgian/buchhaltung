@@ -1,16 +1,35 @@
-﻿@model IEnumerable<Buchhaltung.Buchungssatz>
+﻿@model IEnumerable<Buchhaltung.Models.Buchungssatz>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Buchungssatz";
 }
 
-<h2>Index</h2>
+<h2>
+    Geschäftsfälle @if (ViewBag.Bilanz != null)
+    {
+        @Html.Raw("von ")
+        @Model.First(b => b.Bilanz.Id == ViewBag.Bilanz).Bilanz.Bezeichnung
+    }
+</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (ViewBag.Bilanz != null)
+    {
+        @Html.ActionLink("Zurück zur Bilanz", "Details", "Bilanz", new { id = ViewBag.Bilanz }, null)
+        @Html.Raw(" |")
+    }
+    @Html.ActionLink("Neuer Buchungssatz", "Create", new { bilanz = ViewBag.Bilanz })
 </p>
+
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Soll)
+        </th>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Haben)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Betrag)
         </th>
@@ -18,13 +37,7 @@
             @Html.DisplayNameFor(model => model.Beschreibung)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Bilanz1.Bezeichnung)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Konto.Bezeichnung)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Konto1.Bezeichnung)
+            @Html.DisplayNameFor(model => model.Bilanz)
         </th>
         <th></th>
     </tr>
@@ -32,24 +45,24 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.Soll.Bezeichnung)
+        </td>
+        <td>/</td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Haben.Bezeichnung)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Betrag)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Beschreibung)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Bilanz1.Bezeichnung)
+            @Html.DisplayFor(modelItem => item.Bilanz.Bezeichnung)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Konto.Bezeichnung)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Konto1.Bezeichnung)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id, bilanz = ViewBag.Bilanz }) |
+            @Html.ActionLink("Löschen", "Delete", new { id = item.Id, bilanz = ViewBag.Bilanz })
         </td>
     </tr>
 }

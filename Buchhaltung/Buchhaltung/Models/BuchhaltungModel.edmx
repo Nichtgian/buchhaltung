@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BuchhaltungDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="BuchhaltungModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Anfangsbetrag">
           <Key>
             <PropertyRef Name="Id" />
@@ -32,7 +32,7 @@
           <Property Name="Haben" Type="int" Nullable="false" />
           <Property Name="Betrag" Type="float" Nullable="false" />
           <Property Name="Beschreibung" Type="varchar" MaxLength="250" />
-          <Property Name="Bilanz" Type="int" />
+          <Property Name="Bilanz" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Konto">
           <Key>
@@ -77,7 +77,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Buchungss__Bilan__2F10007B">
-          <End Role="Bilanz" Type="Self.Bilanz" Multiplicity="0..1" />
+          <End Role="Bilanz" Type="Self.Bilanz" Multiplicity="1" />
           <End Role="Buchungssatz" Type="Self.Buchungssatz" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Bilanz">
@@ -124,7 +124,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BuchhaltungDbModelStoreContainer">
+        <EntityContainer Name="BuchhaltungModelStoreContainer">
           <EntitySet Name="Anfangsbetrag" EntityType="Self.Anfangsbetrag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bilanz" EntityType="Self.Bilanz" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Buchungssatz" EntityType="Self.Buchungssatz" Schema="dbo" store:Type="Tables" />
@@ -159,17 +159,17 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="BuchhaltungDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="BuchhaltungModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Anfangsbetrag">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Konto" Type="Int32" Nullable="false" />
+          <Property Name="KontoId" Type="Int32" Nullable="false" />
           <Property Name="Betrag" Type="Double" Nullable="false" />
-          <Property Name="Bilanz" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Bilanz1" Relationship="Self.FK__Anfangsbe__Bilan__32E0915F" FromRole="Anfangsbetrag" ToRole="Bilanz" />
-          <NavigationProperty Name="Konto1" Relationship="Self.FK__Anfangsbe__Konto__31EC6D26" FromRole="Anfangsbetrag" ToRole="Konto" />
+          <Property Name="BilanzId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bilanz" Relationship="Self.FK__Anfangsbe__Bilan__32E0915F" FromRole="Anfangsbetrag" ToRole="Bilanz" />
+          <NavigationProperty Name="Konto" Relationship="Self.FK__Anfangsbe__Konto__31EC6D26" FromRole="Anfangsbetrag" ToRole="Konto" />
         </EntityType>
         <EntityType Name="Bilanz">
           <Key>
@@ -187,14 +187,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Soll" Type="Int32" Nullable="false" />
-          <Property Name="Haben" Type="Int32" Nullable="false" />
+          <Property Name="SollId" Type="Int32" Nullable="false" />
+          <Property Name="HabenId" Type="Int32" Nullable="false" />
           <Property Name="Betrag" Type="Double" Nullable="false" />
           <Property Name="Beschreibung" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Bilanz" Type="Int32" />
-          <NavigationProperty Name="Bilanz1" Relationship="Self.FK__Buchungss__Bilan__2F10007B" FromRole="Buchungssatz" ToRole="Bilanz" />
-          <NavigationProperty Name="Konto" Relationship="Self.FK__Buchungss__Haben__2E1BDC42" FromRole="Buchungssatz" ToRole="Konto" />
-          <NavigationProperty Name="Konto1" Relationship="Self.FK__Buchungssa__Soll__2D27B809" FromRole="Buchungssatz" ToRole="Konto" />
+          <Property Name="BilanzId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bilanz" Relationship="Self.FK__Buchungss__Bilan__2F10007B" FromRole="Buchungssatz" ToRole="Bilanz" />
+          <NavigationProperty Name="Haben" Relationship="Self.FK__Buchungss__Haben__2E1BDC42" FromRole="Buchungssatz" ToRole="Konto" />
+          <NavigationProperty Name="Soll" Relationship="Self.FK__Buchungssa__Soll__2D27B809" FromRole="Buchungssatz" ToRole="Konto" />
         </EntityType>
         <EntityType Name="Konto">
           <Key>
@@ -204,11 +204,11 @@
           <Property Name="Bezeichnung" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Reihenfolge" Type="Int32" Nullable="false" />
-          <Property Name="KontoArt" Type="Int32" Nullable="false" />
+          <Property Name="KontoArtId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Anfangsbetrag" Relationship="Self.FK__Anfangsbe__Konto__31EC6D26" FromRole="Konto" ToRole="Anfangsbetrag" />
-          <NavigationProperty Name="Buchungssatz" Relationship="Self.FK__Buchungss__Haben__2E1BDC42" FromRole="Konto" ToRole="Buchungssatz" />
-          <NavigationProperty Name="Buchungssatz1" Relationship="Self.FK__Buchungssa__Soll__2D27B809" FromRole="Konto" ToRole="Buchungssatz" />
-          <NavigationProperty Name="KontoArt1" Relationship="Self.FK__Konto__KontoArt__2A4B4B5E" FromRole="Konto" ToRole="KontoArt" />
+          <NavigationProperty Name="Haben" Relationship="Self.FK__Buchungss__Haben__2E1BDC42" FromRole="Konto" ToRole="Buchungssatz" />
+          <NavigationProperty Name="Soll" Relationship="Self.FK__Buchungssa__Soll__2D27B809" FromRole="Konto" ToRole="Buchungssatz" />
+          <NavigationProperty Name="KontoArt" Relationship="Self.FK__Konto__KontoArt__2A4B4B5E" FromRole="Konto" ToRole="KontoArt" />
         </EntityType>
         <EntityType Name="KontoArt">
           <Key>
@@ -227,7 +227,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Anfangsbetrag">
-              <PropertyRef Name="Bilanz" />
+              <PropertyRef Name="BilanzId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -239,19 +239,19 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Anfangsbetrag">
-              <PropertyRef Name="Konto" />
+              <PropertyRef Name="KontoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Buchungss__Bilan__2F10007B">
-          <End Role="Bilanz" Type="Self.Bilanz" Multiplicity="0..1" />
+          <End Role="Bilanz" Type="Self.Bilanz" Multiplicity="1" />
           <End Role="Buchungssatz" Type="Self.Buchungssatz" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Bilanz">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Buchungssatz">
-              <PropertyRef Name="Bilanz" />
+              <PropertyRef Name="BilanzId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -263,7 +263,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Buchungssatz">
-              <PropertyRef Name="Haben" />
+              <PropertyRef Name="HabenId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -275,7 +275,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Buchungssatz">
-              <PropertyRef Name="Soll" />
+              <PropertyRef Name="SollId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -287,7 +287,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Konto">
-              <PropertyRef Name="KontoArt" />
+              <PropertyRef Name="KontoArtId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -327,19 +327,19 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BuchhaltungDbModelStoreContainer" CdmEntityContainer="BuchhaltungDbContext">
+        <EntityContainerMapping StorageEntityContainer="BuchhaltungModelStoreContainer" CdmEntityContainer="BuchhaltungDbContext">
           <EntitySetMapping Name="Anfangsbetrag">
-            <EntityTypeMapping TypeName="BuchhaltungDbModel.Anfangsbetrag">
+            <EntityTypeMapping TypeName="BuchhaltungModel.Anfangsbetrag">
               <MappingFragment StoreEntitySet="Anfangsbetrag">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Konto" ColumnName="Konto" />
+                <ScalarProperty Name="KontoId" ColumnName="Konto" />
                 <ScalarProperty Name="Betrag" ColumnName="Betrag" />
-                <ScalarProperty Name="Bilanz" ColumnName="Bilanz" />
+                <ScalarProperty Name="BilanzId" ColumnName="Bilanz" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Bilanz">
-            <EntityTypeMapping TypeName="BuchhaltungDbModel.Bilanz">
+            <EntityTypeMapping TypeName="BuchhaltungModel.Bilanz">
               <MappingFragment StoreEntitySet="Bilanz">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Bezeichnung" ColumnName="Bezeichnung" />
@@ -349,30 +349,30 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Buchungssatz">
-            <EntityTypeMapping TypeName="BuchhaltungDbModel.Buchungssatz">
+            <EntityTypeMapping TypeName="BuchhaltungModel.Buchungssatz">
               <MappingFragment StoreEntitySet="Buchungssatz">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Soll" ColumnName="Soll" />
-                <ScalarProperty Name="Haben" ColumnName="Haben" />
+                <ScalarProperty Name="SollId" ColumnName="Soll" />
+                <ScalarProperty Name="HabenId" ColumnName="Haben" />
                 <ScalarProperty Name="Betrag" ColumnName="Betrag" />
                 <ScalarProperty Name="Beschreibung" ColumnName="Beschreibung" />
-                <ScalarProperty Name="Bilanz" ColumnName="Bilanz" />
+                <ScalarProperty Name="BilanzId" ColumnName="Bilanz" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Konto">
-            <EntityTypeMapping TypeName="BuchhaltungDbModel.Konto">
+            <EntityTypeMapping TypeName="BuchhaltungModel.Konto">
               <MappingFragment StoreEntitySet="Konto">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Bezeichnung" ColumnName="Bezeichnung" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Reihenfolge" ColumnName="Reihenfolge" />
-                <ScalarProperty Name="KontoArt" ColumnName="KontoArt" />
+                <ScalarProperty Name="KontoArtId" ColumnName="KontoArt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="KontoArt">
-            <EntityTypeMapping TypeName="BuchhaltungDbModel.KontoArt">
+            <EntityTypeMapping TypeName="BuchhaltungModel.KontoArt">
               <MappingFragment StoreEntitySet="KontoArt">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Bezeichnung" ColumnName="Bezeichnung" />

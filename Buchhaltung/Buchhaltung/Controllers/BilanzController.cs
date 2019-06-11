@@ -1,5 +1,7 @@
-﻿using Buchhaltung.Models;
+﻿using System.Net;
+using Buchhaltung.Models;
 using System.Web.Mvc;
+using Buchhaltung.Models.Repository;
 
 namespace Buchhaltung.Controllers
 {
@@ -9,12 +11,24 @@ namespace Buchhaltung.Controllers
 
         public ActionResult Index()
         {
-            return View(repository.Index());
+            return View(repository.GetAllBilanz());
         }
 
         public ActionResult Details(int? id)
         {
-            return View(repository.Details(id));
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Bilanz bilanz = repository.GetBilanzById(id);
+
+            if (bilanz == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(bilanz);
         }
 
         public ActionResult Create()
@@ -37,7 +51,19 @@ namespace Buchhaltung.Controllers
 
         public ActionResult Edit(int? id)
         {
-            return View(repository.Edit(id));
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Bilanz bilanz = repository.GetBilanzById(id);
+
+            if (bilanz == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(bilanz);
         }
 
         [HttpPost]
@@ -55,14 +81,26 @@ namespace Buchhaltung.Controllers
 
         public ActionResult Delete(int? id)
         {
-            return View(repository.Delete(id));
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Bilanz bilanz = repository.GetBilanzById(id);
+
+            if (bilanz == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(bilanz);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            repository.DeleteConfirmed(id);
+            repository.Delete(id);
             return RedirectToAction("Index");
         }
 
@@ -72,6 +110,7 @@ namespace Buchhaltung.Controllers
             {
                 repository.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }
