@@ -170,7 +170,7 @@
     <Compile Include="Models\KontoArt.cs">
       <DependentUpon>BuchhaltungModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\Configuration\BilanzConfiguration.cs" />
+    <Compile Include="Models\ModelConfiguration.cs" />
     <Compile Include="Persistence\Entity\Kontoabschluss.cs" />
     <Compile Include="Persistence\IUnitOfWork.cs" />
     <Compile Include="Persistence\Repository\AnfangsbetragRepository.cs" />
