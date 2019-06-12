@@ -73,7 +73,15 @@ INSERT INTO Konto VALUES ('Hypothek', 'HYK', 3, 3);
 INSERT INTO Konto VALUES ('Eigenkapital', 'EIK', 1, 4);
 
 INSERT INTO Bilanz VALUES ('Bilanz BBZW Sursee', 'BBZW2019', GETDATE());
+
 INSERT INTO Anfangsbetrag VALUES (1, 500, 1); /*Kasse*/
-INSERT INTO Anfangsbetrag VALUES (1, 20000, 11); /*EK*/
-INSERT INTO Buchungssatz VALUES (1, 2, 100, 'Kasse / Bank 100', 1);
-INSERT INTO Buchungssatz VALUES (6, 1, 100, 'Mobilien / Kasse 100', 1);
+INSERT INTO Anfangsbetrag VALUES (2, 10000, 1); /*Bank*/
+INSERT INTO Anfangsbetrag VALUES (6, 900, 1); /*Mobilien*/
+INSERT INTO Anfangsbetrag VALUES (8, 1500, 1); /*VLL*/
+INSERT INTO Anfangsbetrag VALUES (10, 1400, 1); /*Hypothek*/
+INSERT INTO Anfangsbetrag VALUES (11, 20000, 1); /*EK*/
+
+INSERT INTO Buchungssatz VALUES (1, 2, 1000, 'Kasse / Bank 1000', 1);
+INSERT INTO Buchungssatz VALUES (6, 1, 400, 'Mobilien / Kasse 400', 1);
+INSERT INTO Buchungssatz VALUES (8, 2, 2400, 'VLL / Bank 2400', 1);
+INSERT INTO Buchungssatz VALUES (1, 11, 15000, 'Kasse / EK 5000', 1);

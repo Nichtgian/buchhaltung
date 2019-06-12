@@ -1,4 +1,5 @@
-﻿@model Buchhaltung.Models.Bilanz
+﻿@using Buchhaltung.Controllers
+@model Buchhaltung.Models.Bilanz
 
 @{
     ViewBag.Title = "Bilanz Details";
@@ -26,64 +27,94 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="margin-top: 1em">
         <div class="col-md-6">
-            <div class="row">
-                <div class="col-md-12">
-                    <p><b>UL</b></p>
-                </div>
-                <div class="col-md-12" style="margin-left: 3em">
-                    <p>K1</p>
-                </div>
-                <div class="col-md-12" style="margin-left: 3em">
-                    <p>K2</p>
-                </div>
-            </div>
+            <b>Umlauf Vermögen</b>
         </div>
-        <div class="col-md-6" style="border-left: solid black 1px">
-            <div class="row">
-                <div class="col-md-12">
-                    <p><b>UL</b></p>
-                </div>
-                <div class="col-md-12" style="margin-left: 3em">
-                    <p>K1</p>
-                </div>
-                <div class="col-md-12" style="margin-left: 3em">
-                    <p>K2</p>
-                </div>
-            </div>
+        <div class="col-md-6">
+            <b>Fremdkapital</b>
         </div>
     </div>
-
+    
     <div class="row">
         <div class="col-md-6">
-            <div class="row">
+            @foreach (var kontoabschluss in ((BilanzController)ViewContext.Controller).GetKontoabschlussListOfKontoArt(Model.Id, 1))
+            {
                 <div class="col-md-12">
-                    <p><b>UL</b></p>
+                    <div class="col-md-9">
+                        @kontoabschluss.Konto.Bezeichnung
+                    </div>
+                    <div class="col-md-3">
+                        @kontoabschluss.Schlussbetrag CHF
+                    </div>
                 </div>
-                <div class="col-md-12" style="margin-left: 3em">
-                    <p>K1</p>
-                </div>
-                <div class="col-md-12" style="margin-left: 3em">
-                    <p>K2</p>
-                </div>
-            </div>
+            }
         </div>
-        <div class="col-md-6" style="border-left: solid black 1px">
-            <div class="row">
+        <div class="col-md-6">
+            @foreach (var kontoabschluss in ((BilanzController)ViewContext.Controller).GetKontoabschlussListOfKontoArt(Model.Id, 3))
+            {
                 <div class="col-md-12">
-                    <p><b>UL</b></p>
+                    <div class="col-md-9">
+                        @kontoabschluss.Konto.Bezeichnung
+                    </div>
+                    <div class="col-md-3">
+                        @kontoabschluss.Schlussbetrag CHF
+                    </div>
                 </div>
-                <div class="col-md-12" style="margin-left: 3em">
-                    <p>K1</p>
-                </div>
-                <div class="col-md-12" style="margin-left: 3em">
-                    <p>K2</p>
-                </div>
-            </div>
+            }
         </div>
     </div>
-
+    
+    <div class="row" style="margin-top: 2em;">
+        <div class="col-md-6">
+            <b>Anlage Vermögen</b>
+        </div>
+        <div class="col-md-6">
+            <b>Eigenkapital</b>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">
+            @foreach (var kontoabschluss in ((BilanzController)ViewContext.Controller).GetKontoabschlussListOfKontoArt(Model.Id, 2))
+            {
+                <div class="col-md-12">
+                    <div class="col-md-9">
+                        @kontoabschluss.Konto.Bezeichnung
+                    </div>
+                    <div class="col-md-3">
+                        @kontoabschluss.Schlussbetrag CHF
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-md-6">
+            @foreach (var kontoabschluss in ((BilanzController)ViewContext.Controller).GetKontoabschlussListOfKontoArt(Model.Id, 4))
+            {
+                <div class="col-md-12">
+                    <div class="col-md-9">
+                        @kontoabschluss.Konto.Bezeichnung
+                    </div>
+                    <div class="col-md-3">
+                        @kontoabschluss.Schlussbetrag CHF
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    
+    <div class="row" style="margin-top: 2em; border-top: solid black 1px; padding-top: 1em;">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-3" style="text-align: center">
+            <p>Total</p>
+        </div>
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-3" style="text-align: center">
+            <p>Total</p>
+        </div>
+    </div>
 
 </div>
 

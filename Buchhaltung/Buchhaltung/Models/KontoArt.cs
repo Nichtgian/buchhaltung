@@ -23,7 +23,7 @@ namespace Buchhaltung.Models
         public int Id { get; set; }
         public string Bezeichnung { get; set; }
         public string Code { get; set; }
-        public Nullable<bool> IsPositive { get; set; }
+        public bool IsPositive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Konto> Konto { get; set; }

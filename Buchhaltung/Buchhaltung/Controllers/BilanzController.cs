@@ -1,7 +1,10 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using Buchhaltung.Models;
 using System.Web.Mvc;
 using Buchhaltung.Persistence;
+using Buchhaltung.Persistence.Entity;
 using Buchhaltung.Persistence.Repository;
 
 namespace Buchhaltung.Controllers
@@ -114,6 +117,11 @@ namespace Buchhaltung.Controllers
             unitOfWork.Complete();
 
             return RedirectToAction("Index");
+        }
+
+        public List<Kontoabschluss> GetKontoabschlussListOfKontoArt(int bilanzId, int kontoArtId)
+        {
+            return unitOfWork.BilanzRepository.GetKontoAbschlussListOfKontoArtFromBilanz(bilanzId, kontoArtId).ToList();
         }
 
         protected override void Dispose(bool disposing)
