@@ -1,14 +1,21 @@
 ﻿using System.Net;
 using System.Web.Mvc;
 using Buchhaltung.Models;
-using Buchhaltung.Models.Repository;
+using Buchhaltung.Persistence;
+using Buchhaltung.Persistence.Repository;
 
 namespace Buchhaltung.Controllers
 {
     public class BuchungssatzController : Controller
     {
-        private BuchungssatzRepository repository = new BuchungssatzRepository();
-        private BuchhaltungDbContext ctx = new BuchhaltungDbContext();
+        private BuchhaltungDbContext ctx;
+        private UnitOfWork unitOfWork;
+
+        public BuchungssatzController()
+        {
+            ctx = new BuchhaltungDbContext();
+            unitOfWork = new UnitOfWork(ctx);
+        }
 
         public ActionResult Index(int? bilanz)
         {
@@ -17,10 +24,10 @@ namespace Buchhaltung.Controllers
             if (bilanz != null)
             {
                 ViewBag.Bilanz = bilanz;
-                return View(repository.GetAllBuchungssatzOfBilanz((int)bilanz));
+                return View(unitOfWork.BuchungssatzRepository.GetBuchungssatzListOfBilanz((int)bilanz));
             }
 
-            return View(repository.GetAllBuchungssatz());
+            return View(unitOfWork.BuchungssatzRepository.GetAll());
         }
 
         public ActionResult Create(int? bilanz)
@@ -40,7 +47,8 @@ namespace Buchhaltung.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.Create(buchungssatz);
+                unitOfWork.BuchungssatzRepository.Add(buchungssatz);
+                unitOfWork.Complete();
 
                 if (bilanz != null)
                 {
@@ -64,7 +72,7 @@ namespace Buchhaltung.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Buchungssatz buchungssatz = repository.GetBuchungssatzById(id);
+            Buchungssatz buchungssatz = unitOfWork.BuchungssatzRepository.Get((int)id);
 
             if (buchungssatz == null)
             {
@@ -86,7 +94,8 @@ namespace Buchhaltung.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.Edit(buchungssatz);
+                unitOfWork.BuchungssatzRepository.Update(buchungssatz);
+                unitOfWork.Complete();
 
                 if (bilanz != null)
                 {
@@ -110,7 +119,7 @@ namespace Buchhaltung.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Buchungssatz buchungssatz = repository.GetBuchungssatzById(id);
+            Buchungssatz buchungssatz = unitOfWork.BuchungssatzRepository.Get((int)id);
 
             if (buchungssatz == null)
             {
@@ -126,7 +135,8 @@ namespace Buchhaltung.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id, int? bilanz)
         {
-            repository.Delete(id);
+            unitOfWork.BuchungssatzRepository.Remove(unitOfWork.BuchungssatzRepository.Get(id));
+            unitOfWork.Complete();
 
             if (bilanz != null)
             {
@@ -140,7 +150,7 @@ namespace Buchhaltung.Controllers
         {
             if (disposing)
             {
-                repository.Dispose();
+                (unitOfWork.BuchungssatzRepository as BuchungssatzRepository)?.BuchhaltungDbContext.Dispose();
             }
 
             base.Dispose(disposing);

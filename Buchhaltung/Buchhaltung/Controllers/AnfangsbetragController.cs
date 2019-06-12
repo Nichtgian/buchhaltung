@@ -1,14 +1,21 @@
 ﻿using System.Net;
 using System.Web.Mvc;
 using Buchhaltung.Models;
-using Buchhaltung.Models.Repository;
+using Buchhaltung.Persistence;
+using Buchhaltung.Persistence.Repository;
 
 namespace Buchhaltung.Controllers
 {
     public class AnfangsbetragController : Controller
     {
-        private AnfangsbetragRepository repository = new AnfangsbetragRepository();
-        private BuchhaltungDbContext ctx = new BuchhaltungDbContext();
+        private BuchhaltungDbContext ctx;
+        private UnitOfWork unitOfWork;
+
+        public AnfangsbetragController()
+        {
+            ctx = new BuchhaltungDbContext();
+            unitOfWork = new UnitOfWork(ctx);
+        }
 
         public ActionResult Index(int? bilanz)
         {
@@ -18,10 +25,10 @@ namespace Buchhaltung.Controllers
             {
                 ViewBag.Bilanz = bilanz;
 
-                return View(repository.GetAllAnfangsbetragOfBilanz((int)bilanz));
+                return View(unitOfWork.AnfangsbetragRepository.GetAnfangsbetragListOfBilanz((int)bilanz));
             }
 
-            return View(repository.GetAllAnfangsbetrag());
+            return View(unitOfWork.AnfangsbetragRepository.GetAll());
         }
 
         public ActionResult Create(int? bilanz)
@@ -40,7 +47,8 @@ namespace Buchhaltung.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.Create(anfangsbetrag);
+                unitOfWork.AnfangsbetragRepository.Add(anfangsbetrag);
+                unitOfWork.Complete();
 
                 if (bilanz != null)
                 {
@@ -63,7 +71,7 @@ namespace Buchhaltung.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Anfangsbetrag anfangsbetrag = repository.GetAnfangsbetragById(id);
+            Anfangsbetrag anfangsbetrag = unitOfWork.AnfangsbetragRepository.Get((int)id);
 
             if (anfangsbetrag == null)
             {
@@ -84,7 +92,8 @@ namespace Buchhaltung.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.Edit(anfangsbetrag);
+                unitOfWork.AnfangsbetragRepository.Update(anfangsbetrag);
+                unitOfWork.Complete();
 
                 if (bilanz != null)
                 {
@@ -107,7 +116,7 @@ namespace Buchhaltung.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Anfangsbetrag anfangsbetrag = repository.GetAnfangsbetragById(id);
+            Anfangsbetrag anfangsbetrag = unitOfWork.AnfangsbetragRepository.Get((int)id);
 
             if (anfangsbetrag == null)
             {
@@ -123,7 +132,8 @@ namespace Buchhaltung.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id, int? bilanz)
         {
-            repository.Delete(id);
+            unitOfWork.AnfangsbetragRepository.Remove(unitOfWork.AnfangsbetragRepository.Get(id));
+            unitOfWork.Complete();
 
             if (bilanz != null)
             {
@@ -137,7 +147,7 @@ namespace Buchhaltung.Controllers
         {
             if (disposing)
             {
-                repository.Dispose();
+                (unitOfWork.AnfangsbetragRepository as AnfangsbetragRepository)?.BuchhaltungDbContext.Dispose();
             }
 
             base.Dispose(disposing);

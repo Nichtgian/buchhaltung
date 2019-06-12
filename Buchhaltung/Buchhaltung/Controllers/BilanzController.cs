@@ -1,17 +1,23 @@
 ﻿using System.Net;
 using Buchhaltung.Models;
 using System.Web.Mvc;
-using Buchhaltung.Models.Repository;
+using Buchhaltung.Persistence;
+using Buchhaltung.Persistence.Repository;
 
 namespace Buchhaltung.Controllers
 {
     public class BilanzController : Controller
     {
-        BilanzRepository repository = new BilanzRepository();
+        private UnitOfWork unitOfWork;
+
+        public BilanzController()
+        {
+            unitOfWork = new UnitOfWork(new BuchhaltungDbContext());
+        }
 
         public ActionResult Index()
         {
-            return View(repository.GetAllBilanz());
+            return View(unitOfWork.BilanzRepository.GetAll());
         }
 
         public ActionResult Details(int? id)
@@ -21,7 +27,7 @@ namespace Buchhaltung.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Bilanz bilanz = repository.GetBilanzById(id);
+            Bilanz bilanz = unitOfWork.BilanzRepository.Get((int)id);
 
             if (bilanz == null)
             {
@@ -42,7 +48,9 @@ namespace Buchhaltung.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.Create(bilanz);
+                unitOfWork.BilanzRepository.Add(bilanz);
+                unitOfWork.Complete();
+
                 return RedirectToAction("Index");
             }
 
@@ -56,7 +64,7 @@ namespace Buchhaltung.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Bilanz bilanz = repository.GetBilanzById(id);
+            Bilanz bilanz = unitOfWork.BilanzRepository.Get((int)id);
 
             if (bilanz == null)
             {
@@ -72,7 +80,9 @@ namespace Buchhaltung.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.Edit(bilanz);
+                unitOfWork.BilanzRepository.Update(bilanz);
+                unitOfWork.Complete();
+
                 return RedirectToAction("Index");
             }
 
@@ -86,7 +96,7 @@ namespace Buchhaltung.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Bilanz bilanz = repository.GetBilanzById(id);
+            Bilanz bilanz = unitOfWork.BilanzRepository.Get((int)id);
 
             if (bilanz == null)
             {
@@ -100,7 +110,9 @@ namespace Buchhaltung.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            repository.Delete(id);
+            unitOfWork.BilanzRepository.Remove(unitOfWork.BilanzRepository.Get(id));
+            unitOfWork.Complete();
+
             return RedirectToAction("Index");
         }
 
@@ -108,7 +120,7 @@ namespace Buchhaltung.Controllers
         {
             if (disposing)
             {
-                repository.Dispose();
+                (unitOfWork.BilanzRepository as BilanzRepository)?.BuchhaltungDbContext.Dispose();
             }
 
             base.Dispose(disposing);
