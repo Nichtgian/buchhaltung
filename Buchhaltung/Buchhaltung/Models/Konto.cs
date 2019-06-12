@@ -18,8 +18,8 @@ namespace Buchhaltung.Models
         public Konto()
         {
             this.Anfangsbetrag = new HashSet<Anfangsbetrag>();
-            this.Haben = new HashSet<Buchungssatz>();
-            this.Soll = new HashSet<Buchungssatz>();
+            this.HabenBuchungssatz = new HashSet<Buchungssatz>();
+            this.SollBuchungssatz = new HashSet<Buchungssatz>();
         }
     
         public int Id { get; set; }
@@ -31,9 +31,9 @@ namespace Buchhaltung.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Anfangsbetrag> Anfangsbetrag { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Buchungssatz> Haben { get; set; }
+        public virtual ICollection<Buchungssatz> HabenBuchungssatz { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Buchungssatz> Soll { get; set; }
+        public virtual ICollection<Buchungssatz> SollBuchungssatz { get; set; }
         public virtual KontoArt KontoArt { get; set; }
     }
 }

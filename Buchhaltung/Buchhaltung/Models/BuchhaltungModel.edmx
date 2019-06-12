@@ -51,6 +51,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Bezeichnung" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IsPositive" Type="bit" />
         </EntityType>
         <Association Name="FK__Anfangsbe__Bilan__32E0915F">
           <End Role="Bilanz" Type="Self.Bilanz" Multiplicity="1" />
@@ -206,8 +207,8 @@
           <Property Name="Reihenfolge" Type="Int32" Nullable="false" />
           <Property Name="KontoArtId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Anfangsbetrag" Relationship="Self.FK__Anfangsbe__Konto__31EC6D26" FromRole="Konto" ToRole="Anfangsbetrag" />
-          <NavigationProperty Name="Haben" Relationship="Self.FK__Buchungss__Haben__2E1BDC42" FromRole="Konto" ToRole="Buchungssatz" />
-          <NavigationProperty Name="Soll" Relationship="Self.FK__Buchungssa__Soll__2D27B809" FromRole="Konto" ToRole="Buchungssatz" />
+          <NavigationProperty Name="HabenBuchungssatz" Relationship="Self.FK__Buchungss__Haben__2E1BDC42" FromRole="Konto" ToRole="Buchungssatz" />
+          <NavigationProperty Name="SollBuchungssatz" Relationship="Self.FK__Buchungssa__Soll__2D27B809" FromRole="Konto" ToRole="Buchungssatz" />
           <NavigationProperty Name="KontoArt" Relationship="Self.FK__Konto__KontoArt__2A4B4B5E" FromRole="Konto" ToRole="KontoArt" />
         </EntityType>
         <EntityType Name="KontoArt">
@@ -217,6 +218,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Bezeichnung" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsPositive" Type="Boolean" />
           <NavigationProperty Name="Konto" Relationship="Self.FK__Konto__KontoArt__2A4B4B5E" FromRole="KontoArt" ToRole="Konto" />
         </EntityType>
         <Association Name="FK__Anfangsbe__Bilan__32E0915F">
@@ -377,6 +379,7 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Bezeichnung" ColumnName="Bezeichnung" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="IsPositive" ColumnName="IsPositive" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

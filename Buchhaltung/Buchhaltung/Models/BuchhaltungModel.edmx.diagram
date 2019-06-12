@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1107fe3249584585971d7224dc25499c" Name="Diagram1">
+      <Diagram DiagramId="1cc0838c4a1c40fab2fa46dc4f66fbfa" Name="Diagram1">
         <EntityTypeShape EntityType="BuchhaltungModel.Anfangsbetrag" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BuchhaltungModel.Bilanz" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BuchhaltungModel.Buchungssatz" Width="1.5" PointX="8.25" PointY="2.625" IsExpanded="true" />
