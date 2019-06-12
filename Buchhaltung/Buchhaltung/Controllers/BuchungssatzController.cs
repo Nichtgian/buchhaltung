@@ -29,6 +29,8 @@ namespace Buchhaltung.Controllers
             ViewBag.HabenId = new SelectList(ctx.Konto, "Id", "Bezeichnung");
             ViewBag.SollId = new SelectList(ctx.Konto, "Id", "Bezeichnung");
 
+            ViewBag.Bilanz = bilanz;
+
             return View();
         }
 
@@ -69,14 +71,11 @@ namespace Buchhaltung.Controllers
                 return HttpNotFound();
             }
 
-            if (bilanz != null)
-            {
-                ViewBag.Bilanz = bilanz;
-            }
-
             ViewBag.BilanzId = new SelectList(ctx.Bilanz, "Id", "Bezeichnung", bilanz);
             ViewBag.HabenId = new SelectList(ctx.Konto, "Id", "Bezeichnung");
             ViewBag.SollId = new SelectList(ctx.Konto, "Id", "Bezeichnung");
+
+            ViewBag.Bilanz = bilanz;
 
             return View(buchungssatz);
         }
@@ -118,10 +117,7 @@ namespace Buchhaltung.Controllers
                 return HttpNotFound();
             }
 
-            if (bilanz != null)
-            {
-                ViewBag.Bilanz = bilanz;
-            }
+            ViewBag.Bilanz = bilanz;
 
             return View(buchungssatz);
         }
@@ -131,6 +127,7 @@ namespace Buchhaltung.Controllers
         public ActionResult DeleteConfirmed(int id, int? bilanz)
         {
             repository.Delete(id);
+
             if (bilanz != null)
             {
                 return RedirectToAction("Index", new { bilanz });

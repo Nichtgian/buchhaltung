@@ -9,6 +9,22 @@
 <div>
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Soll)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Soll.Bezeichnung)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Haben)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Haben.Bezeichnung)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Betrag)
         </dt>
 
@@ -25,29 +41,12 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Bilanz.Bezeichnung)
+            @Html.DisplayNameFor(model => model.Bilanz)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Bilanz.Bezeichnung)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Haben.Bezeichnung)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Haben.Bezeichnung)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Soll.Bezeichnung)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Soll.Bezeichnung)
-        </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {

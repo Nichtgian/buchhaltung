@@ -1,6 +1,4 @@
-﻿using System.Data.Entity;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Web.Mvc;
 using Buchhaltung.Models;
 using Buchhaltung.Models.Repository;
@@ -19,6 +17,7 @@ namespace Buchhaltung.Controllers
             if (bilanz != null)
             {
                 ViewBag.Bilanz = bilanz;
+
                 return View(repository.GetAllAnfangsbetragOfBilanz((int)bilanz));
             }
 
@@ -29,6 +28,8 @@ namespace Buchhaltung.Controllers
         {
             ViewBag.BilanzId = new SelectList(ctx.Bilanz, "Id", "Bezeichnung", bilanz);
             ViewBag.KontoId = new SelectList(ctx.Konto, "Id", "Bezeichnung");
+
+            ViewBag.Bilanz = bilanz;
 
             return View();
         }
@@ -69,55 +70,66 @@ namespace Buchhaltung.Controllers
                 return HttpNotFound();
             }
 
-            if (bilanz != null)
-            {
-                ViewBag.Bilanz = bilanz;
-            }
-
             ViewBag.BilanzId = new SelectList(ctx.Bilanz, "Id", "Bezeichnung", anfangsbetrag.BilanzId);
             ViewBag.KontoId = new SelectList(ctx.Konto, "Id", "Bezeichnung", anfangsbetrag.KontoId);
+
+            ViewBag.Bilanz = bilanz;
 
             return View(anfangsbetrag);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,KontoId,Betrag,BilanzId")] Anfangsbetrag anfangsbetrag)
+        public ActionResult Edit([Bind(Include = "Id,KontoId,Betrag,BilanzId")] Anfangsbetrag anfangsbetrag, int? bilanz)
         {
             if (ModelState.IsValid)
             {
-                ctx.Entry(anfangsbetrag).State = EntityState.Modified;
-                ctx.SaveChanges();
+                repository.Edit(anfangsbetrag);
+
+                if (bilanz != null)
+                {
+                    return RedirectToAction("Index", new { bilanz });
+                }
+
                 return RedirectToAction("Index");
             }
+
             ViewBag.BilanzId = new SelectList(ctx.Bilanz, "Id", "Bezeichnung", anfangsbetrag.BilanzId);
             ViewBag.KontoId = new SelectList(ctx.Konto, "Id", "Bezeichnung", anfangsbetrag.KontoId);
+
             return View(anfangsbetrag);
         }
 
-        // GET: Anfangsbetrag/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id, int? bilanz)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Anfangsbetrag anfangsbetrag = ctx.Anfangsbetrag.Find(id);
+
+            Anfangsbetrag anfangsbetrag = repository.GetAnfangsbetragById(id);
+
             if (anfangsbetrag == null)
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Bilanz = bilanz;
+
             return View(anfangsbetrag);
         }
 
-        // POST: Anfangsbetrag/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, int? bilanz)
         {
-            Anfangsbetrag anfangsbetrag = ctx.Anfangsbetrag.Find(id);
-            ctx.Anfangsbetrag.Remove(anfangsbetrag);
-            ctx.SaveChanges();
+            repository.Delete(id);
+
+            if (bilanz != null)
+            {
+                return RedirectToAction("Index", new { bilanz });
+            }
+
             return RedirectToAction("Index");
         }
 

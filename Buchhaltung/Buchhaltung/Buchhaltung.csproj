@@ -237,7 +237,6 @@
     <Content Include="Views\Buchungssatz\Index.cshtml" />
     <Content Include="Views\Anfangsbetrag\Create.cshtml" />
     <Content Include="Views\Anfangsbetrag\Delete.cshtml" />
-    <Content Include="Views\Anfangsbetrag\Details.cshtml" />
     <Content Include="Views\Anfangsbetrag\Edit.cshtml" />
     <Content Include="Views\Anfangsbetrag\Index.cshtml" />
   </ItemGroup>

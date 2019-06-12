@@ -5,10 +5,11 @@
 }
 
 <h2>
-    Geschäftsfälle @if (ViewBag.Bilanz != null)
+    Buchungssätze 
+    @if (ViewBag.Bilanz != null && Model.FirstOrDefault(b => b.BilanzId == ViewBag.Bilanz) != null)
     {
         @Html.Raw("von ")
-        @Model.First(b => b.Bilanz.Id == ViewBag.Bilanz).Bilanz.Bezeichnung
+        @Model.First(b => b.BilanzId == ViewBag.Bilanz).Bilanz.Bezeichnung
     }
 </h2>
 
