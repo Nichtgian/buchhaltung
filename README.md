@@ -28,7 +28,7 @@ ERM
 ![DB ERM](src/Erm.PNG)
 
 ## Momentaner Stand
-![Screenshot Bilanzen](src/Bilanz.PNG)
+![Screenshot Bilanzen](src/Bilanz.png)
 ![Screenshot Bilanz Details](src/Bilanz-Details.PNG)
 ![Screenshot Buchungssatz](src/Buchungssatz.PNG)
 ![Screenshot Anfangsbetrag](src/Anfangsbetrag.PNG)
