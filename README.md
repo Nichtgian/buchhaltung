@@ -25,13 +25,13 @@ Erstes und veraltetes Schema
 ![DB Schema](src/db.jpg)
 
 ERM
-![DB ERM](src/ERM.png)
+![DB ERM](src/Erm.PNG)
 
 ## Momentaner Stand
-![Screenshot Bilanzen](src/Bilanz.png)
-![Screenshot Bilanz Details](src/Bilanz-Details.png)
-![Screenshot Buchungssatz](src/Buchungssatz.png)
-![Screenshot Anfangsbetrag](src/Anfangsbetrag.png)
+![Screenshot Bilanzen](src/Bilanz.PNG)
+![Screenshot Bilanz Details](src/Bilanz-Details.PNG)
+![Screenshot Buchungssatz](src/Buchungssatz.PNG)
+![Screenshot Anfangsbetrag](src/Anfangsbetrag.PNG)
 
 ## Berechnung
 Logik nachder Berechnung durch Zunahmen und Abnahmen bei den (aktiv) Konten erfolgt.
